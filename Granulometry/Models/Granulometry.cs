@@ -1,26 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Granulometry.Models
 {
-    class Granulometry
+    public class Granulometry : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler ?PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #region Predction
+        #region double X50
+        /// <summary>
+        /// Rock Factor. 
+        /// (Fator de Rocha)
+        /// </summary>
+        private double x50;
+        public double X50
+        {
+            get { return x50; }
+            set { x50 = value; OnPropertyChanged("X50"); }
+        }
+        #endregion
+        #endregion
+
+        #region Calculation
         #region double A
         /// <summary>
         /// Rock Factor. 
         /// (Fator de Rocha)
         /// </summary>
-        public double A { get; set; }
+        private double a;
+        public double A 
+        { 
+            get { return a; } 
+            set { a = value; OnPropertyChanged("A"); } 
+        }
         #endregion
 
         #region double K
         /// <summary>
         /// Powder Factor (kg/m3).
         /// </summary>
-        public double K { get; set; }
+        private double k;
+        public double K
+        {
+            get { return k; }
+            set { k = value; OnPropertyChanged("K"); }
+        }
         #endregion
 
         #region double Q
@@ -28,7 +59,12 @@ namespace Granulometry.Models
         /// Mass corresponding to the amount of explosive per hole (kg).
         /// (Massa correspondente à quantidade de explosivo por furo (kg) )
         /// </summary>
-        public double Q { get; set; }
+        private double q;
+        public double Q
+        {
+            get { return q; }
+            set { q = value; OnPropertyChanged("Q"); }
+        }
         #endregion
 
         #region double RWS
@@ -36,18 +72,40 @@ namespace Granulometry.Models
         /// Relative mass energy of explosive compared to pure ANFO(explosive).
         /// (Energia relativa em massa do explosivo em comparação com o ANFO(explosivo) puro)
         /// </summary>
-        public double RWS { get; set; }
+        private double rws;
+        public double RWS
+        {
+            get { return rws; }
+            set { rws = value; OnPropertyChanged("RWS"); }
+        }
+        #endregion
         #endregion
 
-
-        #region double CalculateX50()
+        #region Geometrical Parameters
+        #region double A
         /// <summary>
-        /// Method for calculating the average granulometry
+        /// Rock Factor. 
+        /// (Fator de Rocha)
         /// </summary>
-        public double CalculateX50()
+        private double ex1;
+        public double Ex1
         {
-            return 10 * A * Math.Pow(K, -0.8) * Math.Pow(Q, 1.0 / 6.0) * Math.Pow(115 / RWS, 19.0 / 30.0);
+            get { return a; }
+            set { a = value; OnPropertyChanged("A"); }
         }
+        #endregion
+
+        #region double K
+        /// <summary>
+        /// Powder Factor (kg/m3).
+        /// </summary>
+        private double ex2;
+        public double Ex2
+        {
+            get { return k; }
+            set { k = value; OnPropertyChanged("K"); }
+        }              
+        #endregion
         #endregion
     }
 }
