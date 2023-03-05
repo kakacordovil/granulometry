@@ -7,4 +7,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="20.4.0.52" />
+    <PackageReference Include="Syncfusion.SfInput.WPF" Version="20.4.0.52" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="20.4.0.52" />
+    <PackageReference Include="syncfusion.ui.wpf.net" Version="20.4.0.52" />
+  </ItemGroup>
+
 </Project>

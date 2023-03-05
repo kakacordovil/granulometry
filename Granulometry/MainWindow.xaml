@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Granulometry"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fragmentation Prediction" Height="450" Width="800"
+        xmlns:viewmodel="clr-namespace:Granulometry.Views">
     <Grid>
-
+        <viewmodel:GranulometryView/>
     </Grid>
 </Window>

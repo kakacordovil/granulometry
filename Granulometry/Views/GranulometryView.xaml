@@ -1,0 +1,469 @@
+﻿<UserControl x:Class="Granulometry.Views.GranulometryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sf="http://schemas.syncfusion.com/wpf"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Granulometry.Views" 
+             xmlns:viewmodels="clr-namespace:Granulometry.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GranulometryViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--the fontawesome not working-->
+    <UserControl.Resources>
+        <DataTemplate x:Key="FontAwesomeTemplate">
+            <TextBlock Text="{Binding}" FontFamily="{StaticResource FontAwesome}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <sf:SfChart x:Name="chart" Margin="10">
+            <sf:SfChart.PrimaryAxis>
+                <sf:CategoryAxis />
+            </sf:SfChart.PrimaryAxis>
+            <sf:SfChart.SecondaryAxis>
+                <sf:NumericalAxis />
+            </sf:SfChart.SecondaryAxis>
+            <sf:SplineSeries x:Name="splineSeries"
+                             ItemsSource="{Binding DataPoints}"
+                             XBindingPath="Label"
+                             YBindingPath="Value" />
+        </sf:SfChart>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <sf:TileViewControl Grid.Row="0" 
+                                Grid.Column="0"
+                                Width="190" Height="200">
+                <sf:TileViewItem Header="Prediction">
+                    <Grid Margin="0,0,0,12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="96"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <!--X20/50/80/90 FORM-->
+                        <Grid Grid.Row="0"
+                              Grid.Column="0" Margin="3,0,-53,40" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <!--X20 label-->
+                            <TextBlock Text="X20" 
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="0,8,0,0"/>
+                            <!--X50 label-->
+                            <TextBlock Text="X50" 
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="0,8,0,0"/>
+                            <!--X80 label-->
+                            <TextBlock Text="X80" 
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="0,8,0,0"/>
+                            <!--X90 label-->
+                            <TextBlock Text="X90" 
+                                       Grid.Row="3"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="0,8,0,0"/>
+                            <!--X90 read only input-->
+                            <sf:DoubleTextBox Name="txtX20"
+                                          Grid.Row="0"
+                                          Grid.Column="1"
+                                          Width="60"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          IsReadOnly="True"
+                                          MinValue="0"
+                                          Value="0" Margin="0,8,0,0" />
+                            <sf:DoubleTextBox Name="txtX50"
+                                          Grid.Row="1"
+                                          Grid.Column="1"
+                                          Width="60"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          IsReadOnly="True"
+                                          MinValue="0"
+                                          Value="0" Margin="0,8,0,0" />
+                            <sf:DoubleTextBox Name="txtX80"
+                                          Grid.Row="2"
+                                          Grid.Column="1"
+                                          Width="60"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          IsReadOnly="True"
+                                          MinValue="0"
+                                          Value="0" Margin="0,8,0,0" />
+                            <sf:DoubleTextBox Name="txtX90"
+                                          Grid.Row="3"
+                                          Grid.Column="1"
+                                          Width="60"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          IsReadOnly="True"
+                                          MinValue="0"
+                                          Value="0" Margin="0,8,0,0" />
+                        </Grid>
+                        <!--UNIFORMITY INDEX-->
+                        <Separator Height="15" Margin="4,0,-35,0" VerticalAlignment="Center" Grid.Row="1" />
+                        <Grid Grid.Row="1"
+                              Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Uniformity index(n):"
+                                       Grid.Column="0" Margin="3,41,10,-41"/>
+                            <sf:DoubleTextBox Name="txtUniformityI"
+                                          Width="60"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          IsReadOnly="True"
+                                          MinValue="0"
+                                          Value="0" Grid.ColumnSpan="2" Margin="114,42,-35,0" VerticalAlignment="Top" />
+                        </Grid>
+                    </Grid>
+
+                </sf:TileViewItem>
+            </sf:TileViewControl>
+
+
+            <sf:TileViewControl Grid.Row="0" 
+                                Grid.Column="1"
+                                Width="190" Height="200">
+                <sf:TileViewItem Header="Calculation">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0"
+                              Grid.Column="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Powder factor" 
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,6,0,0"/>
+                            <sf:DoubleTextBox Name="txt01"
+                                              Grid.Row="1"
+                                              Grid.Column="0"
+                                              Width="80"
+                                              Height="20"
+                                              FlowDirection="RightToLeft"
+                                              MinValue="0"
+                                              Value="0" Margin="0,-2,0,0" />
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="0"
+                              >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Rock factor" 
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,6,0,0"
+                            />
+
+                            <sf:ButtonAdv x:Name="btnRF" Grid.Column="1"
+                                          Margin="14,17,10,0" Width="16" Content="&#xf0c7;" 
+                                          Height="16" VerticalAlignment="Top" SizeMode="Small" 
+                                          FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;"
+                            />
+
+                        </Grid>
+
+
+                        <TextBlock Text="RWS" 
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,6,0,0"/>
+                        <TextBlock Text="Density" 
+                                       Grid.Row="3"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,6,0,0"/>
+
+                        <Grid Grid.Row="0"
+                              Grid.Column="1">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Kg per hole" 
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="0,6,0,0"/>
+                            <sf:DoubleTextBox Name="txt1"
+                                              Grid.Row="1"
+                                              Grid.Column="0"
+                                              Width="70"
+                                              Height="20"
+                                              FlowDirection="RightToLeft"
+                                              MinValue="0"
+                                              Value="0" Margin="0,-2,-1,0" />
+                        </Grid>
+
+                        <sf:DoubleTextBox Name="txt2"
+                                          Grid.Row="1"
+                                          Grid.Column="1"
+                                          Width="70"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1"
+                                          Margin="0,6,-1,0" />
+                        <sf:DoubleTextBox Name="txt3"
+                                          Grid.Row="2"
+                                          Grid.Column="1"
+                                          Width="70"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" Margin="0,6,-1,0" />
+                        <sf:DoubleTextBox Name="txt4"
+                                          Grid.Row="3"
+                                          Grid.Column="1"
+                                          Width="auto"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" Margin="0,6,4,0" />
+
+
+                    </Grid>
+                </sf:TileViewItem>
+            </sf:TileViewControl>
+
+            <sf:TileViewControl Grid.Row="1" 
+                                Grid.Column="1"
+                                Width="190" Height="200">
+
+                <sf:TileViewItem Header="Geometrical parameters">
+                    <Grid Margin="0,0,0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <!--Burden Label-->
+                        <TextBlock Text="Burden" 
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,2,0,0"/>
+                        <!--Spacing Label-->
+                        <TextBlock Text="Spacing" 
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,2,0,0"/>
+                        <!--Diameter Label-->
+                        <TextBlock Text="Diameter" 
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,2,0,0"/>
+
+                        <!--Drill accuracy Label-->
+                        <TextBlock 
+                                       Grid.Row="3"
+                                       Grid.Column="0"
+                                       FontSize="8
+                            " Margin="3,14,0,-5" Grid.RowSpan="2"><Run Text="Drill accuracy "/><LineBreak/><Run Text="standard deviation"/></TextBlock>
+                        <sf:ButtonAdv x:Name="btnDA" Grid.Column="0"
+                                          Margin="76,16,96,0" Width="16" Content="&#xf0c7;" 
+                                          Height="16" VerticalAlignment="Top" SizeMode="Small" 
+                                          FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;" Grid.ColumnSpan="2" Grid.Row="3" RenderTransformOrigin="0.404,1.271" Grid.RowSpan="2"
+                            />
+
+                        <!--Length Label-->
+                        <TextBlock Text="Length" 
+                                       Grid.Row="4"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,8,0,0"/>
+                        <!--Stemming Label-->
+                        <TextBlock Text="Stemming" 
+                                       Grid.Row="5"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,2,0,0"/>
+                        <!--Subdrilling Label-->
+                        <TextBlock Text="Subdrilling" 
+                                       Grid.Row="6"
+                                       Grid.Column="0"
+                                       FontSize="10" Margin="3,2,0,0"/>
+
+                        <!--Burden input-->
+                        <sf:DoubleTextBox Name="iptBurden"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          Width="82"
+                                          Height="18"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                        <!--Spacing input-->
+                        <sf:DoubleTextBox Name="iptSpacing"
+                                          Grid.Column="1"
+                                          Grid.Row="1"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                        <!--Diameter input-->
+                        <sf:DoubleTextBox Name="iptDiameter"
+                                          Grid.Column="1"
+                                          Grid.Row="2"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                        <!--Drill accuracy input-->
+                        <sf:DoubleTextBox Name="iptDrillAccuracy"
+                                          Grid.Column="1"
+                                          Grid.Row="3"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,14,-14,-5" Padding="1,1,1,1" />
+                        <!--Lenght input-->
+                        <sf:DoubleTextBox Name="iptLenght"
+                                          Grid.Column="1"
+                                          Grid.Row="4"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,8,-14,0" Padding="1,1,1,1" />
+                        <!--Stemming input-->
+                        <sf:DoubleTextBox Name="iptStemming"
+                                          Grid.Column="1"
+                                          Grid.Row="5"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                        <!--Subdrilling input-->
+                        <sf:DoubleTextBox Name="iptSubdrilling"
+                                          Grid.Column="1"
+                                          Grid.Row="6"
+                                          Width="82"
+                                          Height="20"
+                                          FlowDirection="RightToLeft"
+                                          MinValue="0"
+                                          Value="0" 
+                                          ShowSpinButton="True"
+                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+
+                    </Grid>
+                </sf:TileViewItem>
+            </sf:TileViewControl>
+
+
+            <DataGrid Name="dgGranulometryTest"
+                      Grid.Row="1"
+                      Grid.Column="0"
+                      AutoGenerateColumns="False"
+                      Margin="5,8"
+                      Padding="3"
+                      ItemsSource="{Binding Path=GranulometriesList}"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="A"
+                                        Width="auto"
+                                        Binding="{Binding Path=A}"/>
+                    <DataGridTextColumn Header="K"
+                                        Width="auto"
+                                        Binding="{Binding Path=K}"/>
+                    <DataGridTextColumn Header="Q"
+                                        Width="auto"
+                                        Binding="{Binding Path=Q}"/>
+                    <DataGridTextColumn Header="RWS"
+                                        Width="auto"
+                                        Binding="{Binding Path=RWS}"/>
+                    <DataGridTextColumn Header="X50"
+                                        Width="auto"
+                                        Binding="{Binding Path=X50}"/>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

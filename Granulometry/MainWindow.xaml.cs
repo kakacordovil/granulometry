@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Granulometry.ViewModels;
 namespace Granulometry
 {
     /// <summary>
@@ -20,9 +21,11 @@ namespace Granulometry
     /// </summary>
     public partial class MainWindow : Window
     {
+        GranulometryViewModel ViewModel;
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel= new GranulometryViewModel();
         }
     }
 }

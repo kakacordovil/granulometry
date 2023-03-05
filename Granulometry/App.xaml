@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Granulometry"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="FontAwesome">/Granulometry;component/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
     </Application.Resources>
 </Application>
