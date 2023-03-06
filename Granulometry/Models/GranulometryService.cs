@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Granulometry.Models
 {
@@ -13,7 +14,8 @@ namespace Granulometry.Models
         {
             ObjGranulometrysList = new List<GranulometryModel>()
             {
-                new GranulometryModel{A=15.42, K=0.61, Q=73.42, RWS=115}
+                new GranulometryModel{A=15.42, K=0.61, Q=73.42, RWS=115},
+                new GranulometryModel{A=20.42, K=0.41, Q=83.42, RWS=235}
             };
         }
 
@@ -27,18 +29,39 @@ namespace Granulometry.Models
             {
                 throw new ArgumentException("Insert the data for A, K, Q and RWS.");
             }
-                        double A = objNewCalculationX50.A;
+            double A = objNewCalculationX50.A;
             double K = objNewCalculationX50.K;
             double Q = objNewCalculationX50.Q;
             double RWS = objNewCalculationX50.RWS;
             double X50 = 10 * A * Math.Pow(K, -0.8) * Math.Pow(Q, 1.0 / 6.0) * Math.Pow(115 / RWS, 19.0 / 30.0);
 
-            objNewCalculationX50.X50 = X50;
+            objNewCalculationX50.A = A;
+            objNewCalculationX50.K = K;
+            objNewCalculationX50.Q = Q;
+            objNewCalculationX50.RWS= RWS;
+            objNewCalculationX50.X50= X50;
 
             ObjGranulometrysList.Add(objNewCalculationX50);
             return X50;
         }
-      
+
+        public double CalculateXmax(GranulometryModel objNewCalculationXMAX)
+        {
+            //Must have B and S 
+            if (objNewCalculationXMAX.B == 0 ||
+               objNewCalculationXMAX.S == 0 )
+            {
+                throw new ArgumentException("Insert the data for B and S.");
+            }
+            double B = objNewCalculationXMAX.B;
+            double S = objNewCalculationXMAX.S;
+
+            double Xmax = (B + S) / 2;
+            Xmax = Xmax * 1000; //xmax meters to millimeters converter
+            objNewCalculationXMAX.Xmax = Xmax;
+            return Xmax;
+        }
+
 
         //Method to get all the granulometry calculation results
         public List<GranulometryModel> GetAll()

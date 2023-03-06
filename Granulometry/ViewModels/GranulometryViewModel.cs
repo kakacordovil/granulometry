@@ -16,16 +16,19 @@ namespace Granulometry.ViewModels
             if(PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                LoadData();
             }
         }
 
         GranulometryService ObjGranulometryService;
         public GranulometryViewModel()
         {
-            ObjGranulometryService = new GranulometryService();
+            ObjGranulometryService = new GranulometryService();               
+            LoadData();
+            GranulometryData = new GranulometryModel();
+           
         }
 
+        #region Display
         private List<GranulometryModel> granulometriesList;
 
         public List<GranulometryModel> GranulometriesList 
@@ -37,11 +40,29 @@ namespace Granulometry.ViewModels
         private void LoadData()
         {
             GranulometriesList = ObjGranulometryService.GetAll();
-        }
-        private void CalculateX50(GranulometryModel objNewCalculationX50)
-        {
 
         }
-        //public double CalculateX50(GranulometryModel objNewCalculationX50)
+        #endregion
+
+        private GranulometryModel granulometryData;
+        public GranulometryModel GranulometryData
+        {
+            get { return granulometryData; }
+            set { granulometryData = value; OnPropertyChanged("GranulometryData"); }
+        }
+
+        #region Operations
+        public double CalculateX50(GranulometryModel objNewCalculationX50)
+        {
+           return ObjGranulometryService.CalculateX50(objNewCalculationX50);
+        }
+
+        public double CalculateX20(GranulometryModel objNewCalculationX20)
+        {
+            return ObjGranulometryService.CalculateX50(objNewCalculationX20);
+        }
+        #endregion
+
+
     }
 }

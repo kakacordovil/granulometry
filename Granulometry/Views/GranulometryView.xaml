@@ -22,18 +22,27 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <sf:SfChart x:Name="chart" Margin="10">
+        
+        <sf:SfChart Header="Particle size curve" Name="chart" Margin="10">
+
             <sf:SfChart.PrimaryAxis>
-                <sf:CategoryAxis />
+                <sf:LogarithmicAxis Header="Passing" LogarithmicBase="10" Minimum="1" Maximum="100000" />
             </sf:SfChart.PrimaryAxis>
+
             <sf:SfChart.SecondaryAxis>
-                <sf:NumericalAxis />
+                <sf:NumericalAxis
+                    Header="Passing"
+                    Interval="0.1"
+                    Maximum="1"
+                    Minimum="0" />
             </sf:SfChart.SecondaryAxis>
-            <sf:SplineSeries x:Name="splineSeries"
-                             ItemsSource="{Binding DataPoints}"
-                             XBindingPath="Label"
-                             YBindingPath="Value" />
+            <sf:SplineSeries ItemsSource="{Binding GranulometriesList}"
+                Label="India"
+                ShowTooltip="True"
+                XBindingPath="A"
+                YBindingPath="K" />
         </sf:SfChart>
+        
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -49,7 +58,7 @@
                                 Grid.Column="0"
                                 Width="190" Height="200">
                 <sf:TileViewItem Header="Prediction">
-                    <Grid Margin="0,0,0,12">
+                  <Grid Margin="0,0,0,12">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="96"/>
                             <RowDefinition/>
@@ -147,7 +156,8 @@
                                           FlowDirection="RightToLeft"
                                           IsReadOnly="True"
                                           MinValue="0"
-                                          Value="0" Grid.ColumnSpan="2" Margin="114,42,-35,0" VerticalAlignment="Top" />
+                                          Value="0" Grid.ColumnSpan="2" Margin="114,42,-35,0" VerticalAlignment="Top" 
+                                          />
                         </Grid>
                     </Grid>
 
@@ -191,7 +201,9 @@
                                               Height="20"
                                               FlowDirection="RightToLeft"
                                               MinValue="0"
-                                              Value="0" Margin="0,-2,0,0" />
+                                              Value="0" Margin="0,-2,0,0" 
+                                              Text="{Binding GranulometryData.K}"
+                                              />
                         </Grid>
 
                         <Grid Grid.Row="1"
@@ -212,11 +224,13 @@
                                        FontSize="10" Margin="3,6,0,0"
                             />
 
-                            <sf:ButtonAdv x:Name="btnRF" Grid.Column="1"
+                            <!--<sf:ButtonAdv x:Name="btnRF" Grid.Column="1"
                                           Margin="14,17,10,0" Width="16" Content="&#xf0c7;" 
                                           Height="16" VerticalAlignment="Top" SizeMode="Small" 
-                                          FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;"
-                            />
+                                          FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;" Click="btnRF_Click"
+                            />-->
+                            <sf:ButtonAdv x:Name="btnRFSave" Grid.Column="1" SmallIcon="C:\DEV\Lixo\granulometry\Granulometry\assets\diskette.png" Label=" " Margin="20,14,0,8" RenderTransformOrigin="0.6,-0.09"/>
+
 
                         </Grid>
 
@@ -244,17 +258,18 @@
                                        Grid.Row="0"
                                        Grid.Column="0"
                                        FontSize="10" Margin="0,6,0,0"/>
-                            <sf:DoubleTextBox Name="txt1"
+                            <sf:DoubleTextBox Name="iptKgPerHole"
                                               Grid.Row="1"
                                               Grid.Column="0"
                                               Width="70"
                                               Height="20"
                                               FlowDirection="RightToLeft"
                                               MinValue="0"
-                                              Value="0" Margin="0,-2,-1,0" />
+                                              Value="0" Margin="0,-2,-1,0"
+                                              Text=""/>
                         </Grid>
 
-                        <sf:DoubleTextBox Name="txt2"
+                        <sf:DoubleTextBox Name="iptRockFactor"
                                           Grid.Row="1"
                                           Grid.Column="1"
                                           Width="70"
@@ -264,23 +279,26 @@
                                           Value="0" 
                                           ShowSpinButton="True"
                                           ScrollInterval="1"
-                                          Margin="0,6,-1,0" />
-                        <sf:DoubleTextBox Name="txt3"
+                                          Margin="0,6,-1,0"
+                                          Text="{Binding GranulometryData.A}"/>
+                        <sf:DoubleTextBox Name="iptRF"
                                           Grid.Row="2"
                                           Grid.Column="1"
                                           Width="70"
                                           Height="20"
                                           FlowDirection="RightToLeft"
                                           MinValue="0"
-                                          Value="0" Margin="0,6,-1,0" />
-                        <sf:DoubleTextBox Name="txt4"
+                                          Value="0" Margin="0,6,-1,0"
+                                          Text="{Binding GranulometryData.RWS}"/>
+                        <sf:DoubleTextBox Name="iptDensity"
                                           Grid.Row="3"
                                           Grid.Column="1"
                                           Width="auto"
                                           Height="20"
                                           FlowDirection="RightToLeft"
                                           MinValue="0"
-                                          Value="0" Margin="0,6,4,0" />
+                                          Value="0" Margin="0,6,4,0"
+                                          Text="{Binding GranulometryData.Density}"/>
 
 
                     </Grid>
@@ -328,11 +346,22 @@
                                        Grid.Column="0"
                                        FontSize="8
                             " Margin="3,14,0,-5" Grid.RowSpan="2"><Run Text="Drill accuracy "/><LineBreak/><Run Text="standard deviation"/></TextBlock>
-                        <sf:ButtonAdv x:Name="btnDA" Grid.Column="0"
+                        <!--<sf:ButtonAdv x:Name="btnDA" Grid.Column="0"
                                           Margin="76,16,96,0" Width="16" Content="&#xf0c7;" 
                                           Height="16" VerticalAlignment="Top" SizeMode="Small" 
                                           FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;" Grid.ColumnSpan="2" Grid.Row="3" RenderTransformOrigin="0.404,1.271" Grid.RowSpan="2"
-                            />
+                        />-->
+                        <sf:ButtonAdv x:Name="btnDARefresh" 
+                                      Grid.Column="0"
+                                      Grid.Row="3"
+                                      SmallIcon="C:\DEV\Lixo\granulometry\Granulometry\assets\refresh.png" 
+                                      Label=" " 
+                                      Margin="73,14,92,21" 
+                                      RenderTransformOrigin="0.6,-0.09" 
+                                      Grid.ColumnSpan="2" 
+                                      Grid.RowSpan="2"  
+                                      />
+
 
                         <!--Length Label-->
                         <TextBlock Text="Length" 
@@ -457,7 +486,7 @@
                     <DataGridTextColumn Header="X50"
                                         Width="auto"
                                         Binding="{Binding Path=X50}"/>
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
 

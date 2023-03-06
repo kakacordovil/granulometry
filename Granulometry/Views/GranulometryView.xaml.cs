@@ -25,14 +25,6 @@ namespace Granulometry.Views
             InitializeComponent();
         }
 
-        private void DoubleTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
-
-        private void txt2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

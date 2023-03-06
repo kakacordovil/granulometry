@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Syncfusion.Windows.Controls.RichTextBoxAdv;
+using System.ComponentModel;
 
 namespace Granulometry.Models
 {
@@ -16,14 +17,27 @@ namespace Granulometry.Models
         #region Prediction
         #region double X50
         /// <summary>
-        /// Rock Factor. 
-        /// (Fator de Rocha)
+        /// Calculation of average granulometry
+        /// (Cálculo da granulometria média)
         /// </summary>
         private double x50;
         public double X50
         {
             get { return x50; }
             set { x50 = value; OnPropertyChanged("X50"); }
+        }
+        #endregion
+
+        #region double Xmax
+        /// <summary>
+        /// Maximum granulometry calculation
+        /// (Cálculo da granulometria máxima)
+        /// </summary>
+        private double xmax;
+        public double Xmax
+        {
+            get { return xmax; }
+            set { xmax = value; OnPropertyChanged("Xmax"); }
         }
         #endregion
         #endregion
@@ -79,6 +93,48 @@ namespace Granulometry.Models
             set { rws = value; OnPropertyChanged("RWS"); }
         }
         #endregion
+
+        #region double B
+        /// <summary>
+        /// Burden meter
+        /// (Burden metro)
+        /// </summary>
+        private double b;
+        public double B
+        {
+            get { return b; }
+            set { b = value; OnPropertyChanged("B"); }
+        }
+        #endregion
+
+        #region double S
+        /// <summary>
+        /// Spacing meters
+        /// (Espaçamento metros)
+        /// </summary>
+        private double s;
+        public double S
+        {
+            get { return s; }
+            set { s = value; OnPropertyChanged("S"); }
+        }
+        #endregion
+
+
+        #region double Density
+        /// <summary>
+        /// Density kg/m3
+        /// (Densidade kg/m3)
+        /// </summary>
+        private double density;
+        public double Density
+        {
+            get { return density; }
+            set { density = value; OnPropertyChanged("Density"); }
+        }
+        #endregion
+
+
         #endregion
 
         #region Geometrical Parameters

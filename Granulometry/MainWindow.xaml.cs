@@ -26,6 +26,7 @@ namespace Granulometry
         {
             InitializeComponent();
             ViewModel= new GranulometryViewModel();
+            this.DataContext = ViewModel;
         }
     }
 }
