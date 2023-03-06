@@ -26,10 +26,10 @@ The project is **on building**.
  
 
 ### NuGet to install
-Syncfusion.SfChart.WPF
-Syncfusion.Shared.WPF
-Syncfusion.UI.WPF.NET
-Syncfusion.SfInput.WPF
+- Syncfusion.SfChart.WPF
+- Syncfusion.Shared.WPF
+- Syncfusion.UI.WPF.NET
+- Syncfusion.SfInput.WPF
 
 ## MockVersion
 ![MockVersion](https://user-images.githubusercontent.com/45371975/223030789-e59d73af-71ef-48c9-a566-89ac76e0b648.png)
