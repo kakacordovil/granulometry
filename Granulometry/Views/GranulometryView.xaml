@@ -9,13 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--the fontawesome not working-->
-    <UserControl.Resources>
-        <DataTemplate x:Key="FontAwesomeTemplate">
-            <TextBlock Text="{Binding}" FontFamily="{StaticResource FontAwesome}" />
-        </DataTemplate>
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -37,10 +30,9 @@
                     Minimum="0" />
             </sf:SfChart.SecondaryAxis>
             <sf:SplineSeries ItemsSource="{Binding GranulometriesList}"
-                Label="India"
                 ShowTooltip="True"
-                XBindingPath="A"
-                YBindingPath="K" />
+                XBindingPath="X50"
+                YBindingPath="XMax" />
         </sf:SfChart>
         
 
@@ -223,13 +215,12 @@
                                        Grid.Column="0"
                                        FontSize="10" Margin="3,6,0,0"
                             />
-
-                            <!--<sf:ButtonAdv x:Name="btnRF" Grid.Column="1"
-                                          Margin="14,17,10,0" Width="16" Content="&#xf0c7;" 
-                                          Height="16" VerticalAlignment="Top" SizeMode="Small" 
-                                          FontFamily="{StaticResource FontAwesome}" DataContext="&#xf0c7;" Click="btnRF_Click"
-                            />-->
-                            <sf:ButtonAdv x:Name="btnRFSave" Grid.Column="1" SmallIcon="C:\DEV\Lixo\granulometry\Granulometry\assets\diskette.png" Label=" " Margin="20,14,0,8" RenderTransformOrigin="0.6,-0.09"/>
+                            <sf:ButtonAdv x:Name="btnRFSave" 
+                                          Grid.Column="1" 
+                                          SmallIcon="C:\DEV\Lixo\granulometry\Granulometry\assets\diskette.png" 
+                                          Label=" " Margin="20,14,0,8" 
+                                          RenderTransformOrigin="0.6,-0.09"
+                                          Command="{Binding Path=SaveCommand}"/>
 
 
                         </Grid>
@@ -462,33 +453,6 @@
             </sf:TileViewControl>
 
 
-            <DataGrid Name="dgGranulometryTest"
-                      Grid.Row="1"
-                      Grid.Column="0"
-                      AutoGenerateColumns="False"
-                      Margin="5,8"
-                      Padding="3"
-                      ItemsSource="{Binding Path=GranulometriesList}"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="A"
-                                        Width="auto"
-                                        Binding="{Binding Path=A}"/>
-                    <DataGridTextColumn Header="K"
-                                        Width="auto"
-                                        Binding="{Binding Path=K}"/>
-                    <DataGridTextColumn Header="Q"
-                                        Width="auto"
-                                        Binding="{Binding Path=Q}"/>
-                    <DataGridTextColumn Header="RWS"
-                                        Width="auto"
-                                        Binding="{Binding Path=RWS}"/>
-                    <DataGridTextColumn Header="X50"
-                                        Width="auto"
-                                        Binding="{Binding Path=X50}"/>
-
-                </DataGrid.Columns>
-            </DataGrid>
 
         </Grid>
 
