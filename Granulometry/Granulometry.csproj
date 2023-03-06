@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="20.4.0.52" />
     <PackageReference Include="Syncfusion.SfInput.WPF" Version="20.4.0.52" />
     <PackageReference Include="Syncfusion.Shared.WPF" Version="20.4.0.52" />
