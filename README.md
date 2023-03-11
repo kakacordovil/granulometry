@@ -2,6 +2,8 @@
 
 Hi! Here is the description about this project: 
 **Granulometry** is the measurement of the size distribution in a collection of grains. **Granulometry** (morphology), **granulometry** computation using the morphological opening operation; Optical **Granulometry**, computation of granulometries from images, and its use in mines; Measurement of grain sizes or particle sizes.
+
+
 ![Mind blowing](https://gifimage.net/wp-content/uploads/2017/10/mind-blown-gif-7.gif)
 
 
