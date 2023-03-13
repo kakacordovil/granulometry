@@ -29,10 +29,10 @@
                     Maximum="1"
                     Minimum="0" />
             </sf:SfChart.SecondaryAxis>
-            <sf:SplineSeries ItemsSource="{Binding GranulometryCurrentData}"
+            <sf:SplineSeries ItemsSource="{Binding GranulometriesList}"
                 ShowTooltip="True"
-                XBindingPath="Sx"
-                YBindingPath="X" />
+                XBindingPath="{Binding Path=X, Mode=TwoWay}"
+                YBindingPath="{Binding Path=Sx, Mode=TwoWay}" />
         </sf:SfChart>
 
 

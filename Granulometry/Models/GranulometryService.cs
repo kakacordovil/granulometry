@@ -100,7 +100,7 @@ namespace Granulometry.Models
 
 
         #region CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
-        public void CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
+        public (double[],double[]) CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
         {
 
             GranulometryModel objNewCalculationGranulometricCurve = new GranulometryModel { Xmax = xmax, X50 = x50, BRippleFactor = bRippleFactor };
@@ -118,7 +118,9 @@ namespace Granulometry.Models
             double[] X = Sx.Select(p => Math.Pow(x50, 1 / Math.Pow(1 / p - 1, bRippleFactor)) * Math.Pow(xmax, 1 - 1 / Math.Pow(1 / p - 1, bRippleFactor))).ToArray();
             var data = Sx.Zip(X, (s, x) => new { Sx = s, X = x });
             objNewCalculationGranulometricCurve.Sx = Sx;
+            objNewCalculationGranulometricCurve.X= X;   
             ObjGranulometrysList.Add(objNewCalculationGranulometricCurve);
+            return (Sx, X);
            
         }
         #endregion
