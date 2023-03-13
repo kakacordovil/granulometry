@@ -99,31 +99,31 @@ namespace Granulometry.Models
         #endregion
 
 
-        #region CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
-        public (double[],double[]) CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
-        {
+        //#region CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
+        //public (double[],double[]) CalculateGranulometricCurve(double xmax, double x50, double bRippleFactor)
+        //{
 
-            GranulometryModel objNewCalculationGranulometricCurve = new GranulometryModel { Xmax = xmax, X50 = x50, BRippleFactor = bRippleFactor };
+        //    GranulometryModel objNewCalculationGranulometricCurve = new GranulometryModel { Xmax = xmax, X50 = x50, BRippleFactor = bRippleFactor };
 
-            //List<double> data = new List<double>();
-            //for (double sx = 0.01; sx <= 1; sx += 0.01)
-            //{
-            //    objNewCalculationGranulometricCurve.Sx= sx;
-            //    double x = Math.Pow(x50, 1 / (1 - 1 / sx)) * Math.Pow(xmax, 1 - 1 / (1 - 1 / sx));
-            //    objNewCalculationGranulometricCurve.X= x;
-            //    data.Add(x);
-            //}
-            double[] Sx = Enumerable.Range(1, 100).Select(p => p / 100.0).ToArray();
+        //    //List<double> data = new List<double>();
+        //    //for (double sx = 0.01; sx <= 1; sx += 0.01)
+        //    //{
+        //    //    objNewCalculationGranulometricCurve.Sx= sx;
+        //    //    double x = Math.Pow(x50, 1 / (1 - 1 / sx)) * Math.Pow(xmax, 1 - 1 / (1 - 1 / sx));
+        //    //    objNewCalculationGranulometricCurve.X= x;
+        //    //    data.Add(x);
+        //    //}
+        //    double[] Sx = Enumerable.Range(1, 100).Select(p => p / 100.0).ToArray();
 
-            double[] X = Sx.Select(p => Math.Pow(x50, 1 / Math.Pow(1 / p - 1, bRippleFactor)) * Math.Pow(xmax, 1 - 1 / Math.Pow(1 / p - 1, bRippleFactor))).ToArray();
-            var data = Sx.Zip(X, (s, x) => new { Sx = s, X = x });
-            objNewCalculationGranulometricCurve.Sx = Sx;
-            objNewCalculationGranulometricCurve.X= X;   
-            ObjGranulometrysList.Add(objNewCalculationGranulometricCurve);
-            return (Sx, X);
+        //    double[] X = Sx.Select(p => Math.Pow(x50, 1 / Math.Pow(1 / p - 1, bRippleFactor)) * Math.Pow(xmax, 1 - 1 / Math.Pow(1 / p - 1, bRippleFactor))).ToArray();
+        //    var data = Sx.Zip(X, (s, x) => new { Sx = s, X = x });
+        //    objNewCalculationGranulometricCurve.Sx = Sx;
+        //    objNewCalculationGranulometricCurve.X= X;   
+        //    ObjGranulometrysList.Add(objNewCalculationGranulometricCurve);
+        //    return (Sx, X);
            
-        }
-        #endregion
+        //}
+        //#endregion
 
         #region Method to get all the granulometry calculation results
         public List<GranulometryModel> GetAll()
@@ -169,7 +169,7 @@ namespace Granulometry.Models
 
             double bRippleFactor = objNewCalculation.BRippleFactor;
 
-            CalculateGranulometricCurve(xmax, x50, bRippleFactor);
+            //CalculateGranulometricCurve(xmax, x50, bRippleFactor);
 
             ObjGranulometrysList.Add(objNewCalculation);
 

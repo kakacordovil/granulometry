@@ -31,8 +31,8 @@
             </sf:SfChart.SecondaryAxis>
             <sf:SplineSeries ItemsSource="{Binding GranulometriesList}"
                 ShowTooltip="True"
-                XBindingPath="{Binding Path=X, Mode=TwoWay}"
-                YBindingPath="{Binding Path=Sx, Mode=TwoWay}" />
+                XBindingPath="X"
+                YBindingPath="Sx" />
         </sf:SfChart>
 
 
