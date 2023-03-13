@@ -2,6 +2,8 @@
 
 Hi! Here is the description about this project: 
 **Granulometry** is the measurement of the size distribution in a collection of grains. **Granulometry** (morphology), **granulometry** computation using the morphological opening operation; Optical **Granulometry**, computation of granulometries from images, and its use in mines; Measurement of grain sizes or particle sizes.
+
+
 ![Mind blowing](https://gifimage.net/wp-content/uploads/2017/10/mind-blown-gif-7.gif)
 
 
@@ -26,10 +28,10 @@ The project is **on building**.
  
 
 ### NuGet to install
-Syncfusion.SfChart.WPF
-Syncfusion.Shared.WPF
-Syncfusion.UI.WPF.NET
-Syncfusion.SfInput.WPF
+- Syncfusion.SfChart.WPF
+- Syncfusion.Shared.WPF
+- Syncfusion.UI.WPF.NET
+- Syncfusion.SfInput.WPF
 
 ## MockVersion
 ![MockVersion](https://user-images.githubusercontent.com/45371975/223030789-e59d73af-71ef-48c9-a566-89ac76e0b648.png)
