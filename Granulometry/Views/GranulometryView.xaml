@@ -15,11 +15,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        
+
         <sf:SfChart Header="Particle size curve" Name="chart" Margin="10">
 
             <sf:SfChart.PrimaryAxis>
-                <sf:LogarithmicAxis Header="Passing" LogarithmicBase="10" Minimum="1" Maximum="100000" />
+                <sf:LogarithmicAxis Header="Size (mm)" LogarithmicBase="10" Minimum="1" Maximum="100000" />
             </sf:SfChart.PrimaryAxis>
 
             <sf:SfChart.SecondaryAxis>
@@ -29,12 +29,12 @@
                     Maximum="1"
                     Minimum="0" />
             </sf:SfChart.SecondaryAxis>
-            <sf:SplineSeries ItemsSource="{Binding GranulometriesList}"
+            <sf:SplineSeries ItemsSource="{Binding GranulometryCurrentData}"
                 ShowTooltip="True"
-                XBindingPath="X50"
-                YBindingPath="XMax" />
+                XBindingPath="Sx"
+                YBindingPath="X" />
         </sf:SfChart>
-        
+
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -46,11 +46,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!--Prediction-->
             <sf:TileViewControl Grid.Row="0" 
                                 Grid.Column="0"
                                 Width="190" Height="200">
+                <!--Prediction-->
                 <sf:TileViewItem Header="Prediction">
-                  <Grid Margin="0,0,0,12">
+                    <Grid Margin="0,0,0,12">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="96"/>
                             <RowDefinition/>
@@ -109,7 +111,9 @@
                                           FlowDirection="RightToLeft"
                                           IsReadOnly="True"
                                           MinValue="0"
-                                          Value="0" Margin="0,8,0,0" />
+                                          Value="0" 
+                                          Text="{Binding Path=X50, Mode=TwoWay, StringFormat={}{0:F2}}"
+                                          Margin="0,8,0,0" />
                             <sf:DoubleTextBox Name="txtX80"
                                           Grid.Row="2"
                                           Grid.Column="1"
@@ -149,17 +153,18 @@
                                           IsReadOnly="True"
                                           MinValue="0"
                                           Value="0" Grid.ColumnSpan="2" Margin="114,42,-35,0" VerticalAlignment="Top" 
-                                          />
+                                          Text="{Binding GranulometryCurrentData.N, Mode=TwoWay, StringFormat={}{0:F2}}"/>
                         </Grid>
                     </Grid>
 
                 </sf:TileViewItem>
             </sf:TileViewControl>
 
-
+            <!--Calculation-->
             <sf:TileViewControl Grid.Row="0" 
                                 Grid.Column="1"
                                 Width="190" Height="200">
+                <!--Calculation-->
                 <sf:TileViewItem Header="Calculation">
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -172,6 +177,8 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+
+                        <!--Powder Factor-->
                         <Grid Grid.Row="0"
                               Grid.Column="0">
 
@@ -194,10 +201,11 @@
                                               FlowDirection="RightToLeft"
                                               MinValue="0"
                                               Value="0" Margin="0,-2,0,0" 
-                                              Text="{Binding GranulometryData.K}"
+                                              Text="{Binding GranulometryCurrentData.K, Mode=TwoWay}"
                                               />
                         </Grid>
 
+                        <!--Rock Factor-->
                         <Grid Grid.Row="1"
                               Grid.Column="0"
                               >
@@ -225,11 +233,13 @@
 
                         </Grid>
 
-
+                        <!--RWS-->
                         <TextBlock Text="RWS" 
                                        Grid.Row="2"
                                        Grid.Column="0"
                                        FontSize="10" Margin="3,6,0,0"/>
+
+                        <!--Density-->
                         <TextBlock Text="Density" 
                                        Grid.Row="3"
                                        Grid.Column="0"
@@ -245,10 +255,13 @@
                                 <RowDefinition Height="20"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
+
+                            <!--Kg per hole-->
                             <TextBlock Text="Kg per hole" 
                                        Grid.Row="0"
                                        Grid.Column="0"
                                        FontSize="10" Margin="0,6,0,0"/>
+
                             <sf:DoubleTextBox Name="iptKgPerHole"
                                               Grid.Row="1"
                                               Grid.Column="0"
@@ -257,7 +270,8 @@
                                               FlowDirection="RightToLeft"
                                               MinValue="0"
                                               Value="0" Margin="0,-2,-1,0"
-                                              Text=""/>
+                                              Text="{Binding Path=GranulometryCurrentData.Q, Mode=TwoWay}"
+                                              />
                         </Grid>
 
                         <sf:DoubleTextBox Name="iptRockFactor"
@@ -271,7 +285,7 @@
                                           ShowSpinButton="True"
                                           ScrollInterval="1"
                                           Margin="0,6,-1,0"
-                                          Text="{Binding GranulometryData.A}"/>
+                                          Text="{Binding GranulometryCurrentData.A, Mode=TwoWay}"/>
                         <sf:DoubleTextBox Name="iptRF"
                                           Grid.Row="2"
                                           Grid.Column="1"
@@ -280,7 +294,7 @@
                                           FlowDirection="RightToLeft"
                                           MinValue="0"
                                           Value="0" Margin="0,6,-1,0"
-                                          Text="{Binding GranulometryData.RWS}"/>
+                                          Text="{Binding GranulometryCurrentData.RWS, Mode=TwoWay}"/>
                         <sf:DoubleTextBox Name="iptDensity"
                                           Grid.Row="3"
                                           Grid.Column="1"
@@ -289,17 +303,19 @@
                                           FlowDirection="RightToLeft"
                                           MinValue="0"
                                           Value="0" Margin="0,6,4,0"
-                                          Text="{Binding GranulometryData.Density}"/>
+                                          Text="{Binding GranulometryCurrentData.Density, Mode=TwoWay}"/>
 
 
                     </Grid>
                 </sf:TileViewItem>
             </sf:TileViewControl>
 
+            <!--Geometrical Parameters-->
             <sf:TileViewControl Grid.Row="1" 
                                 Grid.Column="1"
                                 Width="190" Height="200">
 
+                <!--Geometrical Parameters-->
                 <sf:TileViewItem Header="Geometrical parameters">
                     <Grid Margin="0,0,0,2">
                         <Grid.ColumnDefinitions>
@@ -336,7 +352,7 @@
                                        Grid.Row="3"
                                        Grid.Column="0"
                                        FontSize="8
-                            " Margin="3,14,0,-5" Grid.RowSpan="2"><Run Text="Drill accuracy "/><LineBreak/><Run Text="standard deviation"/></TextBlock>
+                            " Margin="3,18,0,25" Grid.RowSpan="3"><Run Text="Drill accuracy "/><LineBreak/><Run Text="standard deviation"/></TextBlock>
                         <!--<sf:ButtonAdv x:Name="btnDA" Grid.Column="0"
                                           Margin="76,16,96,0" Width="16" Content="&#xf0c7;" 
                                           Height="16" VerticalAlignment="Top" SizeMode="Small" 
@@ -347,7 +363,7 @@
                                       Grid.Row="3"
                                       SmallIcon="C:\DEV\Lixo\granulometry\Granulometry\assets\refresh.png" 
                                       Label=" " 
-                                      Margin="73,14,92,21" 
+                                      Margin="71,18,94,17" 
                                       RenderTransformOrigin="0.6,-0.09" 
                                       Grid.ColumnSpan="2" 
                                       Grid.RowSpan="2"  
@@ -358,7 +374,7 @@
                         <TextBlock Text="Length" 
                                        Grid.Row="4"
                                        Grid.Column="0"
-                                       FontSize="10" Margin="3,8,0,0"/>
+                                       FontSize="10" Margin="3,14,0,25" Grid.RowSpan="2"/>
                         <!--Stemming Label-->
                         <TextBlock Text="Stemming" 
                                        Grid.Row="5"
@@ -368,7 +384,7 @@
                         <TextBlock Text="Subdrilling" 
                                        Grid.Row="6"
                                        Grid.Column="0"
-                                       FontSize="10" Margin="3,2,0,0"/>
+                                       FontSize="10" Margin="3,0,0,2"/>
 
                         <!--Burden input-->
                         <sf:DoubleTextBox Name="iptBurden"
@@ -380,7 +396,10 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="22,0,4,0" 
+                                          Padding="1,1,1,1"
+                                          Text="{Binding Path=GranulometryCurrentData.B, Mode=TwoWay}"/>
                         <!--Spacing input-->
                         <sf:DoubleTextBox Name="iptSpacing"
                                           Grid.Column="1"
@@ -391,7 +410,11 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="3,2,-14,0" 
+                                          Padding="1,1,1,1" 
+                                          Text="{Binding Path=GranulometryCurrentData.S, Mode=TwoWay}"
+                                          />
                         <!--Diameter input-->
                         <sf:DoubleTextBox Name="iptDiameter"
                                           Grid.Column="1"
@@ -402,7 +425,10 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="3,2,-14,0" 
+                                          Padding="1,1,1,1"
+                                          Text="{Binding Path=GranulometryCurrentData.D, Mode=TwoWay}"/>
                         <!--Drill accuracy input-->
                         <sf:DoubleTextBox Name="iptDrillAccuracy"
                                           Grid.Column="1"
@@ -413,7 +439,11 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,14,-14,-5" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="22,18,4,0" 
+                                          Padding="1,1,1,1"
+                                          Text="{Binding Path=GranulometryCurrentData.W, Mode=TwoWay}" Grid.RowSpan="2" VerticalAlignment="Top" 
+/>
                         <!--Lenght input-->
                         <sf:DoubleTextBox Name="iptLenght"
                                           Grid.Column="1"
@@ -424,7 +454,11 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,8,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="22,14,4,0" 
+                                          Padding="1,1,1,1"
+                                          Text="{Binding Path=GranulometryCurrentData.H, Mode=TwoWay}" Grid.RowSpan="2" VerticalAlignment="Top"
+                                          />
                         <!--Stemming input-->
                         <sf:DoubleTextBox Name="iptStemming"
                                           Grid.Column="1"
@@ -435,7 +469,10 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="3,2,-14,0" 
+                                          Padding="1,1,1,1" 
+                                          Text="{Binding Path=GranulometryCurrentData.T, Mode=TwoWay}"/>
                         <!--Subdrilling input-->
                         <sf:DoubleTextBox Name="iptSubdrilling"
                                           Grid.Column="1"
@@ -446,7 +483,73 @@
                                           MinValue="0"
                                           Value="0" 
                                           ShowSpinButton="True"
-                                          ScrollInterval="1" Margin="3,2,-14,0" Padding="1,1,1,1" />
+                                          ScrollInterval="1" 
+                                          Margin="22,0,4,0" 
+                                          Padding="1,1,1,1"
+                                          Text="{Binding Path=GranulometryCurrentData.J, Mode=TwoWay}"/>
+
+                    </Grid>
+                </sf:TileViewItem>
+            </sf:TileViewControl>
+
+            <!--Test-->
+            <sf:TileViewControl Grid.Row="1" 
+                                Grid.Column="0"
+                                Width="190" Height="200">
+                <!--Test-->
+                <sf:TileViewItem Header="Test">
+                    <Grid Margin="4,116,2,24" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Path=Message}"                                     
+                                   Grid.Row="3"
+                                   Grid.Column="0"
+                                   FontSize="10"
+                                   />
+
+                        <DataGrid Name="test"
+                                  AutoGenerateColumns="False"
+                                  Grid.Row="1"
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding Path=GranulometriesList}" 
+                                  Grid.ColumnSpan="2" Margin="0,-104,2,36" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="X"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=X, StringFormat={}{0:F2}}"/>
+                                <DataGridTextColumn Header="Sx"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=Sx, StringFormat={}{0:F2}}"/>
+                                <DataGridTextColumn Header="X50"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=X50, StringFormat={}{0:F2}}"/>
+                                <DataGridTextColumn Header="Xmax"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=Xmax, StringFormat={}{0:F2}}"/>
+                                <DataGridTextColumn Header="N"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=N, StringFormat={}{0:F2}}"/>
+                                <DataGridTextColumn Header="b"
+                                                    Width="auto"
+                                                    Binding="{Binding Path=BRippleFactor, StringFormat={}{0:F2}}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+
+
+
+
+
+
 
                     </Grid>
                 </sf:TileViewItem>

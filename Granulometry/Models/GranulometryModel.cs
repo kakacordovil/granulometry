@@ -1,5 +1,13 @@
 ﻿using Syncfusion.Windows.Controls.RichTextBoxAdv;
 using System.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace Granulometry.Models
 {
@@ -40,6 +48,61 @@ namespace Granulometry.Models
             set { xmax = value; OnPropertyChanged("Xmax"); }
         }
         #endregion
+
+        #region double n
+        /// <summary>
+        /// The uniformity index calculation
+        /// (Cálculo do índice de uniformidade)
+        /// </summary>
+        private double n;
+        public double N
+        {
+            get { return n; }
+            set { n = value; OnPropertyChanged("N"); }
+        }
+        #endregion
+
+        #region double BRippleFactor
+        /// <summary>
+        /// The ripple factor calculation
+        /// (Cálculo do fator de ondulação)
+        /// </summary>
+        private double bRippleFactor;
+        public double BRippleFactor
+        {
+            get { return bRippleFactor; }
+            set { bRippleFactor = value; OnPropertyChanged("BRippleFactor"); }
+        }
+        #endregion
+
+
+        #region double GranulometricCurve
+        /// <summary>
+        /// The Granulometric Curve calculation, Swebrec
+        /// (Cálculo da Curva Granolométrica, Swebrec
+        /// </summary>
+        /// 
+        private List<double> granulometricCurve;
+        public List<double> GranulometricCurve
+        {
+            get { return granulometricCurve;}           
+            set { granulometricCurve = value; OnPropertyChanged("GranulometricCurve"); }
+        }
+        private double[] x;
+        public double[] X
+        {
+            get { return x; }
+            set { x = value; OnPropertyChanged("X"); }
+        }
+
+        private double[] sx;
+        public double[] Sx
+        {
+            get { return sx; }  
+            set { sx = value; OnPropertyChanged("Sx"); }
+        }
+        #endregion
+
         #endregion
 
         #region Calculation
@@ -120,7 +183,6 @@ namespace Granulometry.Models
         }
         #endregion
 
-
         #region double Density
         /// <summary>
         /// Density kg/m3
@@ -134,34 +196,72 @@ namespace Granulometry.Models
         }
         #endregion
 
-
-        #endregion
-
-        #region Geometrical Parameters
-        #region double A
+        #region double H
         /// <summary>
-        /// Rock Factor. 
-        /// (Fator de Rocha)
+        /// Bench height meters
+        /// (Altura da bancada metros)
         /// </summary>
-        //private double ex1;
-        //public double Ex1
-        //{
-        //    get { return a; }
-        //    set { a = value; OnPropertyChanged("A"); }
-        //}
+        private double h;
+        public double H
+        {
+            get { return h; }
+            set { h = value; OnPropertyChanged("H"); }
+        }
         #endregion
 
-        #region double K
+        #region double J
         /// <summary>
-        /// Powder Factor (kg/m3).
+        /// Subdrilling meters
+        /// ("Subperfuração" metros)
         /// </summary>
-        //private double ex2;
-        //public double Ex2
-        //{
-        //    get { return k; }
-        //    set { k = value; OnPropertyChanged("K"); }
-        //}              
+        private double j;
+        public double J
+        {
+            get { return j; }
+            set { j = value; OnPropertyChanged("J"); }
+        }
+        #endregion
+
+        #region double T
+        /// <summary>
+        /// Stemming meters
+        /// (Stemming of metros)
+        /// </summary>
+        private double t;
+        public double T
+        {
+            get { return t; }
+            set { t = value; OnPropertyChanged("T"); }
+        }
+        #endregion
+
+        #region double d
+        /// <summary>
+        /// Diameter millimeters
+        /// (Diametro milímetros)
+        /// </summary>
+        private double d;
+        public double D
+        {
+            get { return d; }
+            set { d = value; OnPropertyChanged("D"); }
+        }
+        #endregion
+
+        #region double W
+        /// <summary>
+        /// Population standard deviation of drilling accuracy in toe meters
+        /// (Desvio padrão populacional da precisão de perfuração no toe metros)
+        /// </summary>
+        private double w;
+        public double W
+        {
+            get { return w; }
+            set { w = value; OnPropertyChanged("W"); }
+        }
         #endregion
         #endregion
+
+
     }
 }
