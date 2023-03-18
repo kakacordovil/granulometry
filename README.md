@@ -41,11 +41,13 @@ The current version doesn't updated the Style property, so the apparence is the 
 
 
 ####On work:
--Inputs
--Tests
--Commands
-
-####Not started:
+- Inputs
+- Commands
 - Uniformity index, n
 - Ripple factor, b
+
+####Not started:
 - Constructing the granulometric curve, Swebrec
+
+Issues:
+- Tests (compatibility trubles .NET 7 with libraries)
